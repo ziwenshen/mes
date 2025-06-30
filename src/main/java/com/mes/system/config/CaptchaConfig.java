@@ -1,42 +1,58 @@
 package com.mes.system.config;
 
 import java.util.Properties;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.google.code.kaptcha.util.Config;
 import com.google.code.kaptcha.Constants;
 
 @Configuration
 public class CaptchaConfig {
+
+    // 普通字符验证码配置
     @Bean(name = "captchaProducer")
     public DefaultKaptcha getKaptchaBean() {
         DefaultKaptcha defaultKaptcha = new DefaultKaptcha();
         Properties properties = new Properties();
-        // 是否有边框 默认为true 我们可以自己设置yes，no
-        properties.setProperty(Constants.KAPTCHA_BORDER, "yes");
-        // 验证码文本字符颜色 默认为Color.BLACK
-        properties.setProperty(Constants.KAPTCHA_TEXTPRODUCER_FONT_COLOR, "black");
-        // 验证码图片宽度 默认为200
-        properties.setProperty(Constants.KAPTCHA_IMAGE_WIDTH, "160");
-        // 验证码图片高度 默认为50
-        properties.setProperty(Constants.KAPTCHA_IMAGE_HEIGHT, "60");
-        // 验证码文本字符大小 默认为40
-        properties.setProperty(Constants.KAPTCHA_TEXTPRODUCER_FONT_SIZE, "38");
-        // KAPTCHA_SESSION_KEY
-        properties.setProperty(Constants.KAPTCHA_SESSION_KEY, "kaptchaCode");
-        // 验证码文本字符长度 默认为5
-        properties.setProperty(Constants.KAPTCHA_TEXTPRODUCER_CHAR_LENGTH, "4");
-        // 验证码文本字体样式 默认为new Font("Arial", 1, fontSize), new Font("Courier", 1, fontSize)
-        properties.setProperty(Constants.KAPTCHA_TEXTPRODUCER_FONT_NAMES, "Arial,Courier");
-        // 图片样式 水纹com.google.code.kaptcha.impl.WaterRipple
-        // 鱼眼com.google.code.kaptcha.impl.FishEyeGimpy
-        // 阴影com.google.code.kaptcha.impl.ShadowGimpy
+        // 验证码基础配置
+        configureBasicProperties(properties, "kaptchaCode");
+        // 字符验证码特有的配置
+        properties.setProperty(Constants.KAPTCHA_TEXTPRODUCER_CHAR_STRING,
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890");
         properties.setProperty(Constants.KAPTCHA_OBSCURIFICATOR_IMPL, "com.google.code.kaptcha.impl.ShadowGimpy");
+
         Config config = new Config(properties);
         defaultKaptcha.setConfig(config);
         return defaultKaptcha;
+    }
+
+    // 数学验证码配置
+    @Bean(name = "captchaProducerMath")
+    public DefaultKaptcha getKaptchaMathBean() {
+        DefaultKaptcha defaultKaptcha = new DefaultKaptcha();
+        Properties properties = new Properties();
+        // 验证码基础配置
+        configureBasicProperties(properties, "kaptchaCodeMath");
+
+        Config config = new Config(properties);
+        defaultKaptcha.setConfig(config);
+        return defaultKaptcha;
+    }
+
+    // 配置验证码的基础属性
+    private void configureBasicProperties(Properties properties, String sessionKey) {
+        properties.setProperty(Constants.KAPTCHA_BORDER, "yes");
+        properties.setProperty(Constants.KAPTCHA_BORDER_COLOR, "105,179,90");
+        properties.setProperty(Constants.KAPTCHA_TEXTPRODUCER_FONT_COLOR, "blue");
+        properties.setProperty(Constants.KAPTCHA_IMAGE_WIDTH, "160");
+        properties.setProperty(Constants.KAPTCHA_IMAGE_HEIGHT, "60");
+        properties.setProperty(Constants.KAPTCHA_TEXTPRODUCER_FONT_SIZE, "38");
+        properties.setProperty(Constants.KAPTCHA_SESSION_CONFIG_KEY, sessionKey);
+        properties.setProperty(Constants.KAPTCHA_TEXTPRODUCER_CHAR_LENGTH, "4");
+        properties.setProperty(Constants.KAPTCHA_TEXTPRODUCER_FONT_NAMES, "Arial,Courier");
+        properties.setProperty(Constants.KAPTCHA_BACKGROUND_CLR_FROM, "lightGray");
+        properties.setProperty(Constants.KAPTCHA_BACKGROUND_CLR_TO, "white");
+        properties.setProperty(Constants.KAPTCHA_NOISE_COLOR, "red");
     }
 }
