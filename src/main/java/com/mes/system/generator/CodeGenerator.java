@@ -38,9 +38,13 @@ public class CodeGenerator {
         String parentPackage = "com.mes.system";
 
         // 直接在代码中指定表名
-        String[] tables = { "sys_user", "sys_role", "sys_department", "sys_permission", "sys_user_department",
-                "sys_department_role", "sys_role_permission" }; // 这里写你的表名
+        // RBAC
+        // String[] tables = { "sys_user", "sys_role", "sys_department",
+        // "sys_permission", "sys_user_department",
+        // "sys_department_role", "sys_role_permission" };
 
+        // MODEL
+        String[] tables = { "model", "property" };
         FastAutoGenerator.create(url, username, password)
                 .globalConfig(builder -> {
                     builder.author(author)
