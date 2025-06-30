@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: system
+    # 数据库配置
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ziwen_ddd
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
