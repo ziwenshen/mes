@@ -11,9 +11,9 @@ import com.mes.system.entity.SysUser;
 @Mapper
 public interface AuthMapper {
 
-    SysUser Login(String username, String password);
+    SysUser findSysUserByName(String username);
 
-    List<SysDepartment> getUserDepartment(String id);
+    List<SysDepartment> selectDepartmentsByUserId(String id);
 
-    List<SysRole> getUserRole(String id);
+    List<SysRole> selectRolesByUserId(String id);
 }

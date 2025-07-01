@@ -5,7 +5,6 @@ import lombok.Setter;
 
 import java.util.List;
 
-
 import com.mes.system.entity.SysDepartment;
 import com.mes.system.entity.SysRole;
 
@@ -24,5 +23,7 @@ public class LoginResponse {
 
     // 返回用户角色
     private List<SysRole> roleList;
+
+    private String token;
 
 }

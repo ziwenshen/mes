@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mes.system.mapper.AuthMapper">
+    <!-- 结果映射 -->
+    <resultMap id="userResultMap" type="com.mes.system.entity.SysUser">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="email" property="email"/>
+        <result column="phone" property="phone"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+<resultMap id="userDepartmentResultMap" type="com.mes.system.entity.SysDepartment">
+    <id column="id" property="id"/>
+    <result column="dept_name" property="deptName"/>
+    <result column="dept_code" property="deptCode"/>
+    <result column="parent_id" property="parentId"/>
+    <result column="dept_level" property="deptLevel"/>
+    <result column="sort_order" property="sortOrder"/>
+    <result column="leader_id" property="leaderId"/>
+    <result column="description" property="description"/>
+    <result column="status" property="status"/>
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+</resultMap>
+
+<resultMap id="roleResultMap" type="com.mes.system.entity.SysRole">
+    <id property="id" column="id"/>
+    <result property="name" column="role_name"/>
+    <result property="code" column="role_code"/>
+    <result property="description" column="description"/>
+    <result property="createTime" column="create_time"/>
+    <result property="updateTime" column="update_time"/>
+</resultMap>
+
+    <!-- 根据用户名查询用户 -->
+    <select id="findSysUserByName" parameterType="string" resultMap="userResultMap">
+        SELECT id, username, password, email, phone, status, create_time, update_time
+        FROM sys_user
+        WHERE username = #{username}
+    </select>
+    <!-- 查询用户的部门列表 -->
+    <select id="selectDepartmentsByUserId" parameterType="string" resultMap="userDepartmentResultMap">
+        SELECT d.id, d.dept_name, d.dept_code, d.parent_id, d.dept_level, d.sort_order,
+            d.leader_id, d.description, d.status, d.create_time, d.update_time
+        FROM sys_department d
+        JOIN sys_user_department ud ON d.id = ud.dept_id
+        WHERE ud.user_id = #{userId}
+    </select>
+    
+    <!-- 查询用户通过部门拥有的角色列表 -->
+    <select id="selectRolesByUserId" parameterType="string" resultMap="roleResultMap">
+        SELECT DISTINCT r.id, r.role_name AS name, r.role_code AS code, r.description, r.create_time, r.update_time
+        FROM sys_role r
+        JOIN sys_department_role dr ON r.id = dr.role_id
+        JOIN sys_user_department ud ON dr.dept_id = ud.dept_id
+        WHERE ud.user_id = #{userId}
+    </select>
+</mapper>
