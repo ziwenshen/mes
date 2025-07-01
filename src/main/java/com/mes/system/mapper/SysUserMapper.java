@@ -1,7 +1,8 @@
 package com.mes.system.mapper;
 
-import com.mes.system.entity.SysUser;
+import org.apache.ibatis.annotations.Mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.mes.system.entity.SysUser;
 
 /**
  * <p>
@@ -11,6 +12,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author shenChaoJue
  * @since 2025-06-30
  */
+@Mapper
 public interface SysUserMapper extends BaseMapper<SysUser> {
 
 }

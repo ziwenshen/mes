@@ -11,6 +11,10 @@ public class ApiResultException extends RuntimeException {
         this.code = error.getCode();
     }
 
+    public ApiResultException(String message) {
+        super(message);
+    }
+
     public ApiResultException(SysError error, String message) {
         super(message);
         error = error == null ? SysError.ERROR : error;
