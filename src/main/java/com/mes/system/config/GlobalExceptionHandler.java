@@ -4,7 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.mes.system.constant.SystemConstants;
+import com.mes.system.constant.Constants;
 import com.mes.system.utils.AjaxResult;
 
 @RestControllerAdvice
@@ -22,7 +22,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public AjaxResult handleException(Exception ex) {
         // 生产环境建议只返回简要信息
-        return AjaxResult.error(SystemConstants.MSG_INTERNAL_SERVER_ERROR + ": " + ex.getMessage());
+        return AjaxResult.error(Constants.MSG_INTERNAL_SERVER_ERROR + ": " + ex.getMessage());
     }
 
 }
