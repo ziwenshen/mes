@@ -29,11 +29,13 @@
 
 <resultMap id="roleResultMap" type="com.mes.system.entity.SysRole">
     <id property="id" column="id"/>
-    <result property="name" column="role_name"/>
-    <result property="code" column="role_code"/>
+    <result property="roleName" column="role_name"/>
+    <result property="roleCode" column="role_code"/>
     <result property="description" column="description"/>
     <result property="createTime" column="create_time"/>
     <result property="updateTime" column="update_time"/>
+    <result property="status" column="status"/>
+
 </resultMap>
 
     <!-- 根据用户名查询用户 -->
@@ -53,7 +55,7 @@
     
     <!-- 查询用户通过部门拥有的角色列表 -->
     <select id="selectRolesByUserId" parameterType="string" resultMap="roleResultMap">
-        SELECT DISTINCT r.id, r.role_name AS name, r.role_code AS code, r.description, r.create_time, r.update_time
+        SELECT DISTINCT r.id, r.role_name , r.role_code , r.description, r.create_time, r.update_time,r.status
         FROM sys_role r
         JOIN sys_department_role dr ON r.id = dr.role_id
         JOIN sys_user_department ud ON dr.dept_id = ud.dept_id
