@@ -12,7 +12,7 @@ spring:
     redis:
       host: 8.152.98.162
       port: 6379
-      password:       mvn clean      mvn clean
+      password: redis123456
       database: 0
       timeout: 10000
 

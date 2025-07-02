@@ -10,6 +10,7 @@ import com.mes.system.exception.ApiResultException;
 import com.mes.system.mapper.AuthMapper;
 import com.mes.system.response.LoginResponse;
 import com.mes.system.service.IAuthService;
+import com.mes.system.service.ICaptchaService;
 import com.mes.system.utils.JwtUtils;
 import com.mes.system.utils.PassWordUtils;
 
@@ -25,12 +26,19 @@ public class AuthServiceImpl implements IAuthService {
     @Resource
     private AuthMapper authMapper;
 
+    @Resource
+    private ICaptchaService captchaService;
+
     @Override
     public LoginResponse login(LoginDto loginDto) {
 
         // 检查登录信息是否为空
         if (loginDto == null || loginDto.getUsername() == null || loginDto.getPassword() == null) {
             throw new ApiResultException("用户名或密码不能为空");
+        }
+        // 判断验证码是否正确
+        if (loginDto.getCaptcha() == null || !captchaService.validate(loginDto.getUuid(), loginDto.getCaptcha())) {
+            throw new ApiResultException("验证码错误");
         }
         String username = loginDto.getUsername().trim();
         String password = loginDto.getPassword().trim();

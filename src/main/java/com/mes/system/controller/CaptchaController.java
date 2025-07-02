@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.FastByteArrayOutputStream;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.code.kaptcha.Producer;
@@ -19,6 +20,7 @@ import com.mes.system.utils.id.IdGenerator;
 import jakarta.annotation.Resource;
 
 @RestController
+@RequestMapping("/api/captcha")
 public class CaptchaController {
     @Resource
     private Producer captchaProducer;

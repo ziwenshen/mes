@@ -7,6 +7,7 @@ com\mes\system\constant\SysError.class
 com\mes\system\controller\SysRoleController.class
 com\mes\system\service\impl\ModelServiceImpl.class
 com\mes\system\controller\PropertyController.class
+com\mes\system\service\ICaptchaService.class
 com\mes\system\mapper\SysUserDepartmentMapper.class
 com\mes\system\utils\AjaxResult.class
 com\mes\system\generator\CodeGenerator.class
@@ -43,6 +44,7 @@ com\mes\system\controller\AuthController.class
 com\mes\system\entity\Model.class
 com\mes\system\generator\model\ModelField.class
 com\mes\system\controller\CaptchaController.class
+com\mes\system\service\impl\CaptchaServiceImpl.class
 com\mes\system\exception\ApiResultException.class
 com\mes\system\service\impl\SysDepartmentServiceImpl.class
 com\mes\system\service\IModelService.class
