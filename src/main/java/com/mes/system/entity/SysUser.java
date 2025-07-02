@@ -2,8 +2,7 @@ package com.mes.system.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 /**
  * <p>
@@ -13,8 +12,7 @@ import lombok.Setter;
  * @author shenChaoJue
  * @since 2025-06-30
  */
-@Getter
-@Setter
+@Data
 @TableName("sys_user")
 public class SysUser implements Serializable {
 

@@ -1,15 +1,13 @@
 package com.mes.system.response;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.List;
 
 import com.mes.system.entity.SysDepartment;
 import com.mes.system.entity.SysRole;
 
-@Getter
-@Setter
+@Data
 public class LoginResponse {
     // 返回用户基础信息
     private String id;

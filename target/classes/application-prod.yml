@@ -1,0 +1,57 @@
+server:
+  port: 8080
+  
+spring:
+  application:
+    name: mes-system
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/mes_system}
+    username: ${DATABASE_USERNAME:postgres}
+    password: ${DATABASE_PASSWORD:mes123456}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      timeout: 2000ms
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+          
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  type-aliases-package: com.mes.system.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    '[com.mes.system]': INFO
+    '[org.springframework.web]': INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+# Actuator 配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: when-authorized
+  health:
+    redis:
+      enabled: true
+    db:
+      enabled: true

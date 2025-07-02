@@ -1,0 +1,35 @@
+{
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "askForPassword": true,
+            "driver": "PostgreSQL",
+            "name": "jdbc:postgresql://localhost:5432/ziwen_ddd",
+            "database": "ziwen_dd",
+            "username": "postgres"
+        },
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "jdbc:postgresql://localhost:5432/ziwen_ddd",
+            "database": "ziwen_ddd",
+            "username": "postgres"
+        },
+        {
+            "previewLimit": 50,
+            "server": "8.152.98.162",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "mes_system",
+            "database": "mes_system",
+            "username": "postgres"
+        }
+    ],
+    "java.debug.settings.onBuildFailureProceed": true,
+    "java.compile.nullAnalysis.mode": "automatic"
+}

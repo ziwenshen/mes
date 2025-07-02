@@ -9,6 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SystemApplication {
 
 	public static void main(String[] args) {
+		// 设置生产环境配置
+		if (System.getenv("RAILWAY_ENVIRONMENT") != null) {
+			System.setProperty("spring.profiles.active", "prod");
+		}
 		SpringApplication.run(SystemApplication.class, args);
 	}
 
